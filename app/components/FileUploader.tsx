@@ -1,5 +1,6 @@
-import React, {useCallback, useState} from 'react'
+import React, {useCallback} from 'react'
 import {useDropzone} from 'react-dropzone'
+import { formatFileSize } from '~/utils/file'
 
 interface FileUploaderProps {
     onFileSelect? : (file: File | null) => void;
@@ -33,8 +34,23 @@ const FileUploader = ({onFileSelect}: FileUploaderProps) => {
                        <img src="/icons/info.svg" alt="upload" className="size-20" />
                    </div>
                    {file ? (
-                      <div>
+                      <div className="uploader-selected-file">
+                          <div className="flex items-center space-x-3">
+                              <img src="/images/pdf.png" alt="pdf" className="size-10"/>
+                              <div>
+                                  <p className="text-lg font-medium text-gray-900 truncate">
+                                      {file.name}
+                                  </p>
+                                  <p className="text-sm font-medium text-gray-700 truncate max-w-xs">
+                                      {formatFileSize(file.size)}
+                                  </p>
+                                  <p className="text-sm text-blue-600 mt-1">
+                                      Click to change file
+                                  </p>
 
+                              </div>
+
+                          </div>
                       </div>
                    ): (
                        <div>
@@ -44,7 +60,7 @@ const FileUploader = ({onFileSelect}: FileUploaderProps) => {
 
                             </span> or drag and drop
                         </p>
-                           <p className="text-lg text-gray-500">PDF (max 20 MB)</p>
+                           <p className="text-sm text-gray-500 mt-1">PDF (max {formatFileSize(20 * 1024 * 1024)})</p>
                        </div>
                    )}
 
