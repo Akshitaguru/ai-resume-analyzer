@@ -30,13 +30,12 @@ const FileUploader = ({onFileSelect}: FileUploaderProps) => {
             <div {...getRootProps()}>
                 <input {...getInputProps()} />
                <div className="sapce-y-4 cursor-pointer">
-                   <div className="mx-auto w-16 h-16 flex items-center justify-center">
-                       <img src="/icons/info.svg" alt="upload" className="size-20" />
-                   </div>
+
                    {file ? (
-                      <div className="uploader-selected-file">
+                      <div className="uploader-selected-file" onClick={(e) =>e.stopPropagation()}>
+                          <img src="/images/pdf.png" alt="pdf" className="size-10"/>
                           <div className="flex items-center space-x-3">
-                              <img src="/images/pdf.png" alt="pdf" className="size-10"/>
+
                               <div>
                                   <p className="text-lg font-medium text-gray-900 truncate">
                                       {file.name}
@@ -44,16 +43,16 @@ const FileUploader = ({onFileSelect}: FileUploaderProps) => {
                                   <p className="text-sm font-medium text-gray-700 truncate max-w-xs">
                                       {formatFileSize(file.size)}
                                   </p>
-                                  <p className="text-sm text-blue-600 mt-1">
-                                      Click to change file
-                                  </p>
-
+                                
                               </div>
 
                           </div>
                       </div>
                    ): (
                        <div>
+                           <div className="mx-auto w-16 h-16 flex items-center justify-center mb-2">
+                               <img src="/icons/info.svg" alt="upload" className="size-20" />
+                           </div>
                         <p className="text-lg text-gray-500">
                             <span className="font-semibold">
                                 Click to upload
